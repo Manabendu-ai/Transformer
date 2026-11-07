@@ -1,0 +1,10 @@
+# Essential utilities
+numpy
+matplotlib
+tqdm
+einops
+
+# Optional but recommended
+jupyter
+ipykernel
+tensorboard

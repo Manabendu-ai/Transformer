@@ -37,3 +37,8 @@ class PositionalEncoding(nn.Module):
         self.pe = self.pe.unsqueeze(0) # (1, seq_lem , d_model)
         self.register_buffer(self.pe, 'pe')
 
+
+    def forward(self, x):
+        x = x + (self.pe[:, :x.shape[1], :]).requires_grad_(False)
+        return self.dropout(x)
+

@@ -33,3 +33,6 @@ class PositionalEncoding(nn.Module):
         pe[:, 0::2] = torch.sin(position * div_term)
         # apply cos to odd position
         pe[:, 1::2] = torch.sin(position * div_term)
+
+        pe = pe.unsqueeze(0) # (1, seq_lem , d_model)
+        self.register_buffer(pe, 'pe')

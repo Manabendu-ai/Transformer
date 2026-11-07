@@ -1,8 +1,8 @@
 <div align = "center">
 
-# Tranformer 
+# Transformer 
 
-<p> <i> Building a tranformer model from scratch using <b>Pytorch</b> </i> </p>
+<p> <i> Building a transformer model from scratch using <b>Pytorch</b> </i> </p>
 
 </div>
 

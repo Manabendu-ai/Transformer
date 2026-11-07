@@ -15,4 +15,11 @@ class InputEmbeddings(nn.Module):
 
 
 class PositionalEncoding(nn.Module):
-    
+
+    # seq_len : maximum len of the sentence
+    # dropout : to make the model less overfit
+    def __init__(self, d_model: int, seq_len: int, dropout: float):
+        super().__init__()
+        self.d_model = d_model
+        self.seq_len = seq_len
+        self.dropout = nn.Dropout(dropout)

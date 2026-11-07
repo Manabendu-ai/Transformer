@@ -12,3 +12,7 @@ class InputEmbeddings(nn.Module):
 
     def forward(self, x):
         return self.embeddings(x) * math.sqrt(self.d_model)
+
+
+class PositionalEncoding(nn.Module):
+    

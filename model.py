@@ -7,4 +7,4 @@ class InputEmbeddings(nn.Module):
         super().__init__()
         self.d_model = d_model
         self.vocab_size = vocab_size
-        
+        self.emnedding = nn.Embedding(vocab_size, d_model)

@@ -139,4 +139,6 @@ class ResidualConnection(nn.Module):
         super().__init__()
         self.dropout = dropout
         self.norm = LayerNormalization()
-        
+
+    def forward(self, x, sublayer):
+        return x + self.dropout(sublayer(self.norm(x)))

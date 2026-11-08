@@ -96,6 +96,7 @@ class MultiHeadAttention(nn.Module):
     @staticmethod
     def attention(query, key, value, mask, dropout: nn.Dropout):
         dk = query.shape[-1]
+        #(Batch, h, seq_len, dk) --> (Batch, h, seq_len, seq_len)
         attention_scores = (query @ key.transpose(-2,-1)) / math.sqrt(dk)
 
         # applying mask before softmax

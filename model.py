@@ -134,4 +134,9 @@ class MultiHeadAttention(nn.Module):
 
 
 class ResidualConnection(nn.Module):
-    
+
+    def __init__(self, dropout: float):
+        super().__init__()
+        self.dropout = dropout
+        self.norm = LayerNormalization()
+        

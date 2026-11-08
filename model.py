@@ -98,4 +98,7 @@ class MultiHeadAttention(nn.Module):
         query = self.wq(q) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
         key = self.wk(k) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
         value = self.wv(v) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
-        
+
+
+        # (Batch, Seq_len, d_model) -> (Batch, Seq_len, h, dk) -> (Batch, h, Seq_len, dk)
+        query = query.veiw(query.shape[0], query.shape[1], self.h, self.dk).transpose(1,2)

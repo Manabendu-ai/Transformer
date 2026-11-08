@@ -52,6 +52,8 @@ class LayerNormalization(nn.Module):
         """
         super().__init__()
         self.eps = eps # eps will provide a numerical stability and to avoid division by zero
+        self.aplha = nn.Parameter(torch.ones(1)) # Multiplied
+        self.bias = nn.Parameter(torch.ones(1)) # Additive
 
     
 

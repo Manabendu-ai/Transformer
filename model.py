@@ -48,7 +48,7 @@ class LayerNormalization(nn.Module):
     def __init__(self, eps: float = 10**-6) -> None:
         """
         In the LayerNormalization the mean and the variance of each batch is calculated independently of the other batches.
-        Then the values in the batch are updated with new value computed with the mean and variance.
+        Then the values in the batch are updated with new value computed with the mean, variance, aplha and bias parameters.
         """
         super().__init__()
         self.eps = eps # eps will provide a numerical stability and to avoid division by zero
@@ -59,6 +59,7 @@ class LayerNormalization(nn.Module):
     def forward(self, x):
         mean = x.mean(dim =1, keepdim =True)
         std = x.std(dim =1, keepdim =True)
+        return self.alpha * (x - mean) / (std + self.eps) + self.bias
 
     
 

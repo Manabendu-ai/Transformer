@@ -73,6 +73,7 @@ class FeedForwardBlock(nn.Module):
 
     def forward(self, x):
         # (Batch, Seq_len, d_model) --> (Batch, seq_len, dff) --> (Batch, seq_len, d_model)
-        
+        return self.linear2(self.dropout(torch.relu(self.linear1(x))))
+
 
 

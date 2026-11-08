@@ -63,5 +63,11 @@ class LayerNormalization(nn.Module):
 
 
 class FeedForwardBlock(nn.Module):
-    
+
+    def __init__(self, d_model: int, dff: int, dropout: float):
+        super().__init__()
+        self.linear1 = nn.Linear(d_model, dff) # w1 and B1
+        self.dropout = nn.Dropout(dropout)
+        self.linear2 = nn.Linear(dff, d_model) # w2 and B2
+        
 

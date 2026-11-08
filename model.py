@@ -77,3 +77,5 @@ class FeedForwardBlock(nn.Module):
 
 
 
+class MultiHeadAttention(nn.Module):
+    

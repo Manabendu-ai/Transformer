@@ -101,6 +101,7 @@ class MultiHeadAttention(nn.Module):
         # applying mask before softmax
         if mask is not None:
             attention_scores.masked_fill(mask == 0, -1e9)
+        attention_scores = attention_scores.softmax(dim = -1)
 
 
 

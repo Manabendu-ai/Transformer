@@ -103,3 +103,6 @@ class MultiHeadAttention(nn.Module):
         # (Batch, Seq_len, d_model) -> (Batch, Seq_len, h, dk) -> (Batch, h, Seq_len, dk)
         query = query.view(query.shape[0], query.shape[1], self.h, self.dk).transpose(1,2)
         key = key.view(key.shape[0], key.shape[1], self.h, self.dk).transpose(1,2)
+        value = value.view(value.shape[0], value.shape[1], self.h, self.dk).transpose(1,2)
+
+        

@@ -85,4 +85,5 @@ class MultiHeadAttention(nn.Module):
         self.h = h
         assert d_model % h == 0, "d_model is not divisible by h"
         self.dk = d_model // h
-        
+        self.wq = nn.Linear(d_model, d_model)
+        self.wk = nn.Linear(d_model, d_model)

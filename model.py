@@ -125,3 +125,6 @@ class MultiHeadAttention(nn.Module):
         x, self.attention_scores = MultiHeadAttention(
             query, key, value, mask, self.dropout
         )
+
+        # (Batch, h, seq_len, dk) --> (Batch, seq_len, h, dk) --> (Batch, seq_len, d_model)
+        x = x.transpose(1, 2).contiguous().view(x.shape[0], -1, self.h * self.dk)

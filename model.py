@@ -77,3 +77,56 @@ class FeedForwardBlock(nn.Module):
 
 
 
+class MultiHeadAttention(nn.Module):
+
+    def __init__(self, d_model: int, h: int, dropout: float):
+        super().__init__()
+        self.d_model = d_model
+        self.h = h
+        assert d_model % h == 0, "d_model is not divisible by h"
+        self.dk = d_model // h
+        self.wq = nn.Linear(d_model, d_model)
+        self.wk = nn.Linear(d_model, d_model)
+        self.wv = nn.Linear(d_model, d_model)
+
+        self.wo = nn.Linear(d_model, d_model)
+        self.dropout = nn.Dropout(dropout)
+
+
+    @staticmethod
+    def attention(query, key, value, mask, dropout: nn.Dropout):
+        dk = query.shape[-1]
+        #(Batch, h, seq_len, dk) --> (Batch, h, seq_len, seq_len)
+        attention_scores = (query @ key.transpose(-2,-1)) / math.sqrt(dk)
+
+        # applying mask before softmax
+        if mask is not None:
+            attention_scores.masked_fill(mask == 0, -1e9)
+        attention_scores = attention_scores.softmax(dim = -1) # (Batch, h, seq_len, seq_len)
+        if dropout is not None:
+            attention_scores = dropout(attention_scores)
+
+        return (attention_scores @ value), attention_scores
+
+
+    def forward(self, q, k, v, mask):
+        # Mask is used when we dont want certain words to interact with some words
+        query = self.wq(q) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
+        key = self.wk(k) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
+        value = self.wv(v) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
+
+
+        # (Batch, Seq_len, d_model) -> (Batch, Seq_len, h, dk) -> (Batch, h, Seq_len, dk)
+        query = query.view(query.shape[0], query.shape[1], self.h, self.dk).transpose(1,2)
+        key = key.view(key.shape[0], key.shape[1], self.h, self.dk).transpose(1,2)
+        value = value.view(value.shape[0], value.shape[1], self.h, self.dk).transpose(1,2)
+
+
+        x, self.attention_scores = MultiHeadAttention(
+            query, key, value, mask, self.dropout
+        )
+
+        # (Batch, h, seq_len, dk) --> (Batch, seq_len, h, dk) --> (Batch, seq_len, d_model)
+        x = x.transpose(1, 2).contiguous().view(x.shape[0], -1, self.h * self.dk)
+        # (Batch, seq_len, d_model) --> (Batch, seq_len, d_model)
+        return self.wo(x)

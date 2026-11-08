@@ -87,3 +87,4 @@ class MultiHeadAttention(nn.Module):
         self.dk = d_model // h
         self.wq = nn.Linear(d_model, d_model)
         self.wk = nn.Linear(d_model, d_model)
+        self.wv = nn.Linear(d_model, d_model)

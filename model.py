@@ -88,3 +88,6 @@ class MultiHeadAttention(nn.Module):
         self.wq = nn.Linear(d_model, d_model)
         self.wk = nn.Linear(d_model, d_model)
         self.wv = nn.Linear(d_model, d_model)
+
+        self.wo = nn.Linear(d_model, d_model)
+        self.dropout = nn.Dropout(dropout)

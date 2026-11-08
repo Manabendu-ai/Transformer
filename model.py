@@ -42,3 +42,24 @@ class PositionalEncoding(nn.Module):
         x = x + (self.pe[:, :x.shape[1], :]).requires_grad_(False)
         return self.dropout(x)
 
+
+class LayerNormalization(nn.Module):
+
+    def __init__(self, eps: float = 10**-6) -> None:
+        """
+        In the LayerNormalization the mean and the variance of each batch is calculated independently of the other batches.
+        Then the values in the batch are updated with new value computed with the mean, variance, aplha and bias parameters.
+        """
+        super().__init__()
+        self.eps = eps # eps will provide a numerical stability and to avoid division by zero
+        self.aplha = nn.Parameter(torch.ones(1)) # Multiplied
+        self.bias = nn.Parameter(torch.ones(1)) # Additive
+
+
+    def forward(self, x):
+        mean = x.mean(dim =1, keepdim =True)
+        std = x.std(dim =1, keepdim =True)
+        return self.alpha * (x - mean) / (std + self.eps) + self.bias
+
+    
+

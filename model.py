@@ -96,7 +96,7 @@ class MultiHeadAttention(nn.Module):
     @staticmethod
     def attention(query, key, value, mask, dropout: nn.Dropout):
         dk = query.shape[-1]
-        
+
 
 
 
@@ -112,3 +112,7 @@ class MultiHeadAttention(nn.Module):
         key = key.view(key.shape[0], key.shape[1], self.h, self.dk).transpose(1,2)
         value = value.view(value.shape[0], value.shape[1], self.h, self.dk).transpose(1,2)
 
+
+        x, self.attention_scores = MultiHeadAttention(
+            query, key, value, mask, self.dropout
+        )

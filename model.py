@@ -95,6 +95,7 @@ class MultiHeadAttention(nn.Module):
 
     def forward(self, q, k, v, mask):
         # Mask is used when we dont want certain words to interact with some words
-        query = self.wq(q)
-        key = self.wk(k)
-        value = self.wv(v)
+        query = self.wq(q) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
+        key = self.wk(k) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
+        value = self.wv(v) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
+        

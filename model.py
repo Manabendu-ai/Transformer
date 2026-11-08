@@ -44,5 +44,8 @@ class PositionalEncoding(nn.Module):
 
 
 class LayerNormalization(nn.Module):
-    
+
+    def __init__(self, eps: float = 10**-6) -> None:
+        super().__init__()
+        self.eps = eps
 

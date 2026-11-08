@@ -98,6 +98,10 @@ class MultiHeadAttention(nn.Module):
         dk = query.shape[-1]
         attention_scores = (query @ key.transpose(-2,-1)) / math.sqrt(dk)
 
+        # applying mask before softmax
+        if mask is not None:
+            attention_scores.masked_fill(mask == 0, -1e9)
+
 
 
     def forward(self, q, k, v, mask):

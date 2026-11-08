@@ -105,6 +105,7 @@ class MultiHeadAttention(nn.Module):
         if dropout is not None:
             attention_scores = dropout(attention_scores)
 
+        return (attention_scores @ value), attention_scores
 
 
     def forward(self, q, k, v, mask):

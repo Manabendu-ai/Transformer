@@ -93,6 +93,13 @@ class MultiHeadAttention(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
 
+    @staticmethod
+    def attention(query, key, value, mask, dropout: nn.Dropout):
+        dk = query.shape[-1]
+        
+
+
+
     def forward(self, q, k, v, mask):
         # Mask is used when we dont want certain words to interact with some words
         query = self.wq(q) # (Batch, Seq_len, d_model) -> (Batch, Seq_len, d_model)
@@ -105,4 +112,3 @@ class MultiHeadAttention(nn.Module):
         key = key.view(key.shape[0], key.shape[1], self.h, self.dk).transpose(1,2)
         value = value.view(value.shape[0], value.shape[1], self.h, self.dk).transpose(1,2)
 
-        

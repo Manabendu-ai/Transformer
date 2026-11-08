@@ -69,5 +69,10 @@ class FeedForwardBlock(nn.Module):
         self.linear1 = nn.Linear(d_model, dff) # w1 and B1
         self.dropout = nn.Dropout(dropout)
         self.linear2 = nn.Linear(dff, d_model) # w2 and B2
+
+
+    def forward(self, x):
+        # (Batch, Seq_len, d_model) --> (Batch, seq_len, dff) --> (Batch, seq_len, d_model)
         
+
 

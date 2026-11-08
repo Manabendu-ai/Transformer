@@ -55,5 +55,10 @@ class LayerNormalization(nn.Module):
         self.aplha = nn.Parameter(torch.ones(1)) # Multiplied
         self.bias = nn.Parameter(torch.ones(1)) # Additive
 
+
+    def forward(self, x):
+        mean = x.mean(dim =1, keepdim =True)
+        std = x.std(dim =1, keepdim =True)
+
     
 

@@ -42,3 +42,7 @@ class PositionalEncoding(nn.Module):
         x = x + (self.pe[:, :x.shape[1], :]).requires_grad_(False)
         return self.dropout(x)
 
+
+class LayerNormalization(nn.Module):
+    
+

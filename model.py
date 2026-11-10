@@ -146,9 +146,10 @@ class ResidualConnection(nn.Module):
 
 class EncoderBlock(nn.Module):
 
-    def __init__(self, self_attention_block: MultiHeadAttention, feed_forward_block: FeedForwardBlock):
+    def __init__(self, self_attention_block: MultiHeadAttention, feed_forward_block: FeedForwardBlock, dropout: float):
         super().__init__()
         self.self_attention_block = self_attention_block
         self.feed_forward_block = feed_forward_block
-        
+        self.residual_connection = self.residual_connection
+
         

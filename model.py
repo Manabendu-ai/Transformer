@@ -199,3 +199,7 @@ class Decoder(nn.Module):
         for layer in self.layers:
             x = layer(x, encoder_output, src_mask, tar_mask)
         return self.norm(x)
+
+
+class ProjectionLayer(nn.Module):
+    

@@ -190,3 +190,7 @@ class DecoderBlock(nn.Module):
 
 class Decoder(nn.Module):
     
+    def __init__(self, layers: nn.ModuleList):
+        super().__init__()
+        self.layers = layers
+        self.norm = LayerNormalization()

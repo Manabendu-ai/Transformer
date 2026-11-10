@@ -161,4 +161,7 @@ class EncoderBlock(nn.Module):
 
 class Encoder(nn.Module):
 
-    
+    def __init__(self, layers: nn.ModuleList):
+        super().__init__()
+        self.layers = layers
+        self.norm = LayerNormalization()

@@ -152,4 +152,7 @@ class EncoderBlock(nn.Module):
         self.feed_forward_block = feed_forward_block
         self.residual_connection = nn.ModuleList([ResidualConnection(dropout)] for _ in range(2))
 
+
+    def forward(self, x, src_mask):
+
         

@@ -236,3 +236,8 @@ class Transformer(nn.Module):
         src = self.src_emd(src)
         src_mask = self.src_pos(src)
         return self.encoder(src, src_mask)
+
+    def decode(self, encoder_output, src_mask, tar, tar_mask):
+        tar = self.tar_emd(tar)
+        tar = self.tar_pos(tar)
+        return self.decoder(tar, encoder_output, src_mask, tar_mask)

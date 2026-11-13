@@ -256,3 +256,10 @@ def build_transformer(src_vocab_size: int, tar_vocab_size: int,
 
     src_pos = PositionalEncoding(d_model, src_seq_len, dropout)
     tar_pos = PositionalEncoding(d_model, tar_seq_len, dropout)
+
+    encoder_blocks = []
+    for _ in range(N):
+        encoder_self_attention_block = MultiHeadAttention(d_model, h, dropout)
+        feed_forward_block = FeedForwardBlock(d_model, dff, dropout)
+        encoder_block = EncoderBlock(d_model, encoder_self_attention_block, feed_forward_block, dropout)
+        encoder_blocks.append(encoder_block)

@@ -252,3 +252,4 @@ def build_transformer(src_vocab_size: int, tar_vocab_size: int,
                       dropout:int = 0.1, dff:int = 2048
     )->Transformer:
     src_emd= InputEmbeddings(d_model, src_vocab_size)
+    tar_emd= InputEmbeddings(d_model, tar_vocab_size)

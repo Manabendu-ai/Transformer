@@ -263,3 +263,12 @@ def build_transformer(src_vocab_size: int, tar_vocab_size: int,
         feed_forward_block = FeedForwardBlock(d_model, dff, dropout)
         encoder_block = EncoderBlock(d_model, encoder_self_attention_block, feed_forward_block, dropout)
         encoder_blocks.append(encoder_block)
+
+
+    decoder_blocks = []
+    for _ in range(N):
+        decoder_self_attention_block = MultiHeadAttention(d_model, h, dropout)
+        decoder_cross_attention_block = MultiHeadAttention(d_model, h, dropout)
+        feed_forward_block = FeedForwardBlock(d_model, d_ff, dropout)
+        decoder_block = DecoderBlock(d_model, decoder_self_attention_block, decoder_cross_attention_block, feed_forward_block, dropout)
+        decoder_blocks.append(decoder_block)

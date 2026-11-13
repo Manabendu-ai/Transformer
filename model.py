@@ -244,3 +244,7 @@ class Transformer(nn.Module):
 
     def project(self, x):
         return self.projection_layer(x)
+
+
+def build_transformer(src_vocab_size: int, tar_vocab_size: int, src_seq_len: int, tar_seq_len: int, d_model:int = 512, N: int = 8, h: int= 8):
+    

@@ -224,3 +224,10 @@ class Transformer(nn.Module):
             projection_layer: ProjectionLayer
         ):
         super().__init__()
+        self.encoder = encoder
+        self.decoder = decoder
+        self.src_emd = src_emd
+        self.tar_emd = tar_emd
+        self.src_pos = src_pos
+        self.tar_pos = tar_pos
+        self.projection_layer = projection_layer

@@ -241,3 +241,6 @@ class Transformer(nn.Module):
         tar = self.tar_emd(tar)
         tar = self.tar_pos(tar)
         return self.decoder(tar, encoder_output, src_mask, tar_mask)
+
+    def project(self, x):
+        return self.projection_layer(x)
